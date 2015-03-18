@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="grid_8">
+    <h2>Articles</h2>
+    <p>Les articles sont comme des contenants, ils peuvent contenir</br> plusieurs images ou techniques. Mais un dessin ou un tips</br> seul a besoin d'un article pour etre publiable</p>
+
+
+    <h3>Vos articles</h3>
+    <% if(!@my_art.empty?) %>
+      <table>
+        <thead>
+          <tr>
+            <th>Titre</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <% @my_art.each do |article| %>
+            <tr>
+              <td><%= link_to article.name, article %></td>
+              <td><%= article.commentaries.size %> commentaires</td>
+              <td><%= link_to 'Modifier', edit_article_path(article) %></td>
+              <td><%= link_to 'Detruire', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+    <%= link_to 'Creer un nouvel article', new_article_path %>
+  </div>
+  <div class="grid_4">
+    <h3>Les autres articles</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Utilisateur</th>
+          <th>Titre</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @articles.each do |article| %>
+          <tr>
+            <td><%= User.find(article.user_id).pseudo %></td>
+
+            <td><%= link_to article.name, article %></td>
+
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+</div>

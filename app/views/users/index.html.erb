@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h3>La liste des autres utilisateurs:</h3>
+
+<table class "table">
+  <thead>
+    <tr>
+
+      <th><strong>Pseudo</strong></th>
+      <th><strong>Prenom</strong></th>
+      <th><strong>Nombre d'articles</strong></th>
+      <th><strong>Age</strong></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.pseudo, user,class:"btn" %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.articles.size %></strong></td>
+        <td><%= user.age %></td>
+        <% if(@cookie) == user.id %>
+          <td><%= link_to 'Modifier mon compte', edit_user_path(user),class:"btn" %></td>
+          <td><%= link_to 'Supprimer mon compte', user, method: :delete, data: { confirm: 'Etes vous sur?' },class:"btn" %></td>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

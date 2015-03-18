@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tableau_id: 1
+  postIt_id: 1
+
+two:
+  tableau_id: 1
+  postIt_id: 1

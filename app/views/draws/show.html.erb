@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="grid_12">
+    <h2>
+      <%= @draw.content %>
+    </h2>
+    <div class="sep-1 offset__1"></div>
+
+    <h3>
+      Par: <%= User.find(Article.find(@draw.postIt_id).user_id).pseudo %>
+    </h3>
+
+
+    <% if(!@draw.file.nil?)%>
+      <%= image_tag "photos/#{@draw.file}" %>
+    <% else %>
+      <%= image_tag "entete.png" %>
+    <% end %>
+    <% if(@b_owner) %>
+      <%= link_to 'Modifier le titre de ce dessin', edit_draw_path(@draw) %>
+      <%= link_to 'Modifier l\'image',"/image/new/#{@draw.id}" %>
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Vos messages</h3>
+<% if(@messages.empty?) %>
+  <p>Vous n'avez pas de messages</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+
+        <th>De</th>
+        <th>Contenu</th>
+        <th colspan="4"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @messages.each do |message| %>
+        <tr>
+
+          <td><%= User.find(message.user_id).pseudo %></td>
+          <td><%= message.content %></td>
+          <td><%= link_to 'Repondre', "/message/new/#{message.user_id}" %></td>
+          <td><%= link_to 'Detruire', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

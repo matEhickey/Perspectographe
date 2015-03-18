@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Perspectographe</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+
+<body >
+<header>
+
+  <div class="row">
+  <div class="header_top">
+    <div class="grid_4">
+    <%= image_tag 'entete.png'%>
+  </div>
+  <div class= "grid_8" >
+    <h1>Perspectographe <br>Perspective </h1>
+    Ameliorer vos notions </div>
+  </div>
+</div>
+
+
+
+
+    </div>
+
+  <section id="stuck_container">
+    <div class="container">
+        <div class="row">
+          <div class="grid_12 ">
+
+            <div class="navigation ">
+              <nav>
+                <ul class="sf-menu">
+                  <li><%= link_to 'Accueil',"/" %></li>
+                    <% if(@cookie.to_i != 0) %>
+                      <li><%= link_to "Deconnexion",'/deconnection' %></li>
+                      <li><%= link_to 'Les autres membres',"/users" %></li>
+                      <li><%= link_to 'Messages',"/messages" %></li>
+                      <li><%= link_to 'Articles',"/articles" %></li>
+                    <% else %>
+                      <li><%= link_to 'Connexion',"/connection" %></li>
+                    <% end %>
+                  <li><%= link_to 'Dessins',"/draws" %></li>
+                  <li><%= link_to 'Techniques',"/tips" %></li>
+                </ul>
+              </nav>
+
+
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</header>
+
+
+
+
+  <section id="content">
+    <div class="container">
+      <%= yield %>
+  </div>
+  </section>
+
+
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="grid_12">
+        <h2>Contacts</h2>
+        <a href="#" class="footer_mail">Mathias.Didier.Etu@univ-lemans.fr</a>
+        <div class="sub-copy">Site par Mathias DIDIER</div>
+      </div>
+      </div>
+
+    </div>
+  </footer>
+
+  </body>
+  </html>

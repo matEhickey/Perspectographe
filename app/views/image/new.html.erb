@@ -1,0 +1,11 @@
+<%= form_for(:image,:url => "/image/upload", :html =>{:multipart => true}) do |f| %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :draw_id, :value => @param_draw %>
+  <%= f.submit %>
+<% end %>
+
+
+
+
+<p>Ajout d'une image pour le dessin :<%= @param_draw %></p>
+<p>Nous vous conseillons d'uploader des images de 560x400 pour un meilleur rendu</p>

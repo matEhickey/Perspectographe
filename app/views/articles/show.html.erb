@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Utilisateur:</strong>
+  <%= User.find(@article.user_id).pseudo %>
+</p>
+
+<p>
+  <strong>Titre:</strong>
+  <%= @article.name %>
+</p>
+
+<% if(@cookie == @article.user_id) %>
+  <%= link_to 'Editer', edit_article_path(@article) %> |
+  <%= link_to 'Detruire', @article, method: :delete, data: { confirm: 'Etes vous sur?' } %>
+<% end %>
+</br>
+-------------------------------------------------------------------------------
+
+  <h2>Contenu:</h2>
+  <%if(@b_owner)%>
+    <%= link_to 'Ajouter un Dessin', "/draws/new/#{@article.id}" %>
+    <%= link_to 'Ajouter une Technique', "/tips/new/#{@article.id}" %>
+  <% end %>
+  <% if(@draws.empty? == false) %>
+  <section id="content" class="gallery">
+    <div class="row">
+      <h3>Dessins:</h3>
+      <% @draws.each{|draw| %>
+        <div class="grid_4">
+          <div class="box">
+            <% if(!draw.file.nil?) %>
+              <%= image_tag "photos/#{draw.file}"  %>
+            <% else %>
+              <%= image_tag "entete.png"  %>
+            <% end %>
+            <div class="box_bot">
+              <div class="box_bot_title"><div class="fa fa-chevron-right"><%= draw.content %></div></div>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+  </section>
+  <% end %>
+<% if(@tips.empty? == false) %>
+<section id="content" class="gallery">
+  <div class="row">
+    <h3>Techniques:</h3>
+    <% @tips.each{|tip| %>
+      <p><%= tip.content %></p>
+      <p><%= tip.video %></p>
+    <% } %>
+  </div>
+  </section>
+<% end %>
+
+<% if(@article.commentaries.empty? == false) %>
+  <h3>Commentaires :</h3>
+  <% @article.commentaries.each{|comment| %>
+    <p><%= User.find(comment.user_id).pseudo %> -> <%= comment.content %></p>
+  <% } %>
+<% end %>
+</br>
+<%= link_to 'Commenter',"/commentaries/new/#{@article.id}" %>

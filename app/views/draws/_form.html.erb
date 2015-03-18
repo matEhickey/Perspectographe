@@ -1,0 +1,24 @@
+<%= form_for(@draw) do |f| %>
+  <% if @draw.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@draw.errors.count, "error") %> prohibited this draw from being saved:</h2>
+
+      <ul>
+      <% @draw.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.hidden_field :postIt_id, :value => @article %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

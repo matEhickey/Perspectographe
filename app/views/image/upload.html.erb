@@ -1,0 +1,4 @@
+<div class="grid_10">
+  <p><%= image_tag("photos/#{@param_image.original_filename}", class: "img_inner") %></p>
+  <p>Ajout au dessin: <%= Draw.find(@param_draw).content %></p>
+</div>

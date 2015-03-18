@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h3>Les dessins</h3>
+
+<section id="content" class="gallery">
+
+<div class="row">
+    <% @draws.each do |draw| %>
+    <div class="grid_4">
+      <div class="box">
+        <% if(!draw.file.nil?)%>
+          <%= image_tag "photos/#{draw.file}" %>
+        <% else %>
+          <%= image_tag "entete.png" %>
+        <% end %>
+        <div class="box_bot">
+          <div class="box_bot_title"><div class="fa fa-chevron-right"><%= draw.content %></div></div>
+
+
+          <ul>
+
+            <li><%= link_to User.find(Article.find(draw.postIt_id).user_id).pseudo,User.find(Article.find(draw.postIt_id).user_id)  %></li>
+            <li><%= link_to "Voir", draw,class:"btn" %></li>
+            <li>Article:<%= link_to Article.find(draw.postIt_id).name,Article.find(draw.postIt_id) %></li>
+            <div class="clear"> </div>
+            <% if(@cookie == Article.find(draw.postIt_id).user_id) %>
+              <li>Vous etes proprietaire de ce contenu</li>
+              <li><%= link_to 'Modifier', edit_draw_path(draw),class:"btn" %></li>
+              <li><%= link_to 'Detruire', draw, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn" %></li>
+            <% end %>
+          </ul>
+
+      </div>
+      </div>
+      </div>
+
+    <% end %>
+  </div>
+</section>

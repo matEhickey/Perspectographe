@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="grid_6">
+    <div data-si-mousemove-trigger="10" class="shuffle-me">
+    <% @images.each{|x| %>
+      <%= image_tag "photos/#{x.file}" %>
+    <% } %>
+    </div>
+  </div>
+
+  <div class="grid_6">
+  <h2>Bienvenu sur Le Perspectographe</h2>
+
+  <p>
+  Ce site a pour vocation de vous aider a mieux comprendre
+   les principes <strong>techniques</strong> liés a la perspective, tels que
+   les points de fuites multiples, les ombres, les <strong>Types</strong>
+   de perspectives ( Cavaliere, Conique, curviligne, etc.. )
+ <p>
+   <div class="sep-1 offset__1"></div>
+  <p>Ce site sera <strong>bientot</strong> operationel</p>
+  <p>Vous pouvez malgré tout deja vous inscrire
+    poster du contenu (images ou videos), les commenter
+     envoyer un messages a un membre, vous y abonner
+      et voir l'avancement du developemment</p>
+  <p>
+    a noter que vous n'avez pas besoin de vous connecter pour
+    regarder les dessins et les techniques, neanmoins vous ne pourrez
+    ni les commenter, ni vous abonner aux auteurs, ni poster de contenu
+  </p>
+
+  </div>
+</div>

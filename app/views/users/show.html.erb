@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="grid_2">
+      <h2>
+        <%= @user.pseudo %>
+      </h2>
+
+      <p>
+        <strong>Prenom:</strong>
+        <%= @user.firstname %>
+      </p>
+
+      <p>
+        <strong>Age:</strong>
+        <%= @user.age %>
+      </p>
+
+      <% if !@cookie.nil? %>
+        <% if(User.find(@cookie) == @user) %>
+        <%= link_to 'Envoyer un message', "/message/new/#{@user.id}"%>
+          <%= link_to 'Modifier mon compte', edit_user_path(@user) %>
+        <% else %>
+        <%= link_to 'Envoyer un message', "/message/new/#{@user.id}"%>
+          <% abonne = false %>
+        <% Following.all.each{|x| %>
+          <% if((x.user_id == @cookie)&&(x.followUser_id == @user.id)) %>
+            <% abonne = true %>
+          <% end %>
+        <% } %>
+
+
+          <% if(!abonne) %>
+            <%= link_to 'Follow', "/users/#{@user.id}/suivre" %>
+          <% else %>
+
+          <% Following.all.each{|x| %>
+            <% if(x.user_id == @cookie) %>
+                <%= link_to 'Unfollow', x, method: :delete, data: { confirm: 'Etes vous sur?' } %>
+            <% break %>
+            <% end %>
+          <% } %>
+
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="grid_10">
+      <% @user.articles.all.each{|article| %>
+        <div class="grid_3">
+          <div class="box">
+            <% image = nil %>
+              <% Draw.all.each{|draw| %>
+                <% if(draw.postIt_id == article.id) %>
+                  <% if(!draw.file.nil?) %>
+                    <% image = "photos/#{draw.file}" %>
+                    <%= image_tag image %>
+                    <% break %>
+                  <% end %>
+                <% end %>
+              <% } %>
+              <% if(image.nil?) %>
+                <% image = "entete.png" %>
+                <%= image_tag image %>
+              <% end %>
+
+            <div class="box_bot">
+              <div class="box_bot_title"><div class="fa fa-chevron-right"><%= link_to article.name,article %></div></div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </div>

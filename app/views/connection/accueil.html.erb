@@ -1,0 +1,63 @@
+
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="grid_8">
+    <h2><%= "Bonjour #{User.find(@cookie).firstname}" %></h2>
+    <div class="sep-1 offset__1"></div>
+    <h3>Vous avez <%= @followers.length %> abonnés</h3>
+    <div class="sep-1 offset__1"></div>
+
+    <% if(@followings.length == 0) %>
+      <p>Vous n'avez pas encore d'abonnements,
+        nous vous conseillons d'aller dans
+        la rubrique dessins ou techniques
+        afin de vous abonner aux publications
+         qui vous interresent.</p>
+    <% else %>
+
+      <h3>Vous etes abonné a :</h3>
+      <% @followings.each{|x| %>
+        <div class="grid_3">
+          <div class="box">
+            <%= image_tag "entete.png" %>
+          <div class="box_bot">
+            <div class="box_bot_title"><%= link_to User.find(x).pseudo,User.find(x),class:"fa fa-chevron-right" %></div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+
+    <% end %>
+  </div>
+
+
+  <div class="grid_3">
+      <h2>Categories</h2>
+      <ul class="list-1">
+            <li><span></span><%= link_to "Messages(#{@nbMessage})","/messages",class:"fa fa-chevron-right" %> </li>
+            <li><span></span><%= link_to 'Les Articles',"/articles",class:"fa fa-chevron-right" %> </li>
+            <li><span></span><%= link_to 'Les Dessins',"/draws",class:"fa fa-chevron-right" %> </li>
+            <li><span></span><%= link_to 'Les Techniques',"/tips",class:"fa fa-chevron-right" %> </li>
+            <li><span></span><%= link_to 'Les Membres',"/users",class:"fa fa-chevron-right" %> </li>
+            <li><span></span><%= link_to "Modifier mon compte","/users/#{@cookie}/edit",class:"fa fa-chevron-right" %> </li>
+      </ul>
+  </div>
+</div>
+<div class="sep-1 offset__1"></div>
+<div class="row">
+
+    <h3>Les dessins des utilisateurs auquels vous etes abonné</h3>
+    <% @images.each{|x| %>
+      <div class="grid_3">
+        <div class="box">
+          <%= image_tag "photos/#{x.file}" %>
+
+        <div class="box_bot">
+          <div class="box_bot_title"><%= link_to x.content,x,class:"fa fa-chevron-right" %></div>
+          Par: <%= link_to User.find(Article.find(x.postIt_id).user_id).pseudo,User.find(Article.find(x.postIt_id).user_id) %>
+        </div>
+      </div>
+    </div>
+    <% } %>
+
+</div>

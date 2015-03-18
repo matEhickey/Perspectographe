@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Utilisateur:</strong>
+  <%= User.find(Article.find(@tip.postIt_id).user_id).pseudo %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @tip.content %>
+</p>
+<% if(!@tip.video.nil?) %>
+  <div class:"grid_10">
+      <iframe width="840" height="472" src=<%="https://www.youtube.com/embed/#{@tip.video.split("=").last}"%> frameborder="0" allowfullscreen></iframe>
+  </div>
+<% end %>
+<% if(@b_owner) %>
+  <div class:"grid_2">
+    <%= link_to 'Detruire', @tip, method: :delete, data: { confirm: 'Etes vous sur?' },class:"btn" %>
+  </div>
+<% end %>

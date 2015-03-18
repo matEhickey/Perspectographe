@@ -1,0 +1,25 @@
+<%= form_for(@following) do |f| %>
+  <% if @following.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@following.errors.count, "error") %> prohibited this following from being saved:</h2>
+
+      <ul>
+      <% @following.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <% f.label :user_id %><br>
+    <%= f.hidden_field(:user_id,:value => @user )%>
+  <div>
+    <p>vous voulez allez vous abonner a <%= User.find(@follow).pseudo %></p>
+  </div>
+
+    <%= f.hidden_field(:followUser_id,:value => @follow )%>
+  <div class="actions">
+
+    <%= f.submit "S'abonner",class:"btn" %>
+  </div>
+<% end %>

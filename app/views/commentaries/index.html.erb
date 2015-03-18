@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h2>Vos commentaires</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th><strong>Article</strong></th>
+      <th><strong>Commentaire</strong></th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @commentaries.each do |commentary| %>
+      <tr>
+        <td><%= link_to Article.find(commentary.article_id).name,Article.find(commentary.article_id),class:"btn" %></td>
+        <td><%= commentary.content %></td>
+        <td><%= link_to 'Editer', edit_commentary_path(commentary),class:"btn" %></td>
+        <td><%= link_to 'Detruire', commentary, method: :delete, data: { confirm: 'Etes vous sur?' },class:"btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
